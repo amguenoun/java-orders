@@ -1,58 +1,63 @@
 package com.lambda.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "agents")
 public class Agent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long agent_code;
+	private long agentcode;
 
 	@Column(nullable = false)
-	private String agent_name;
+	private String agentname;
 
-	private String working_area;
-
+	private String workingarea;
 	private double commission;
-
 	private String phone;
-
 	private String country;
+
+	@OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("agents")
+	private List<Customer> customers = new ArrayList<>();
 
 	public Agent() {
 	}
 
-	public Agent(String agent_name, String working_area, double commission, String phone, String country) {
-		this.agent_name = agent_name;
-		this.working_area = working_area;
+	public Agent(String agentname, String workingarea, double commission, String phone, String country) {
+		this.agentname = agentname;
+		this.workingarea = workingarea;
 		this.commission = commission;
 		this.phone = phone;
 		this.country = country;
 	}
 
-	public long getAgent_code() {
-		return agent_code;
+	public long getAgentcode() {
+		return agentcode;
 	}
 
-	public void setAgent_code(long agent_code) {
-		this.agent_code = agent_code;
+	public void setAgentcode(long agentcode) {
+		this.agentcode = agentcode;
 	}
 
-	public String getAgent_name() {
-		return agent_name;
+	public String getAgentname() {
+		return agentname;
 	}
 
-	public void setAgent_name(String agent_name) {
-		this.agent_name = agent_name;
+	public void setAgentname(String agentname) {
+		this.agentname = agentname;
 	}
 
-	public String getWorking_area() {
-		return working_area;
+	public String getWorkingarea() {
+		return workingarea;
 	}
 
-	public void setWorking_area(String working_area) {
-		this.working_area = working_area;
+	public void setWorkingarea(String workingarea) {
+		this.workingarea = workingarea;
 	}
 
 	public double getCommission() {
@@ -77,5 +82,13 @@ public class Agent {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
 	}
 }
