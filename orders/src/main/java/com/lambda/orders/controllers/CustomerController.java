@@ -26,7 +26,7 @@ public class CustomerController {
 	@PostMapping(value = "/new", consumes = {"application/json"})
 	public ResponseEntity<?> addCustomer(@Valid @RequestBody Customer customer){
 		customerService.save(customer);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	//PUT localhost:2019/customer/update/{custcode} - Updates the customer based off of custcode. Does not have to do anything with Orders
