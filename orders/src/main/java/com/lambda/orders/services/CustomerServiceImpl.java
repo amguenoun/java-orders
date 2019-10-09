@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 		newCustomer.setAgent(customer.getAgent());
 
 		for(Order o : customer.getOrders()){
-			newCustomer.getOrders().add(new Order(o.getOrdamount(), o.getAdvanceamount(), o.getOrddescription(), o.getCustomer()));
+			newCustomer.getOrders().add(new Order(o.getOrdamount(), o.getAdvanceamount(), o.getCustomer(), o.getOrddescription()));
 		}
 
 		return custRepo.save(newCustomer);
